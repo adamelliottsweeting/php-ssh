@@ -281,7 +281,8 @@ class Sftp extends Subsystem
 
             $filename = sprintf('%s/%s', $directory, $result);
 
-            if (false === @scandir($this->getUrl($filename))) {
+            $url = $this->getUrl($filename);
+            if (false === @scandir($this->getUrl($filename)) || @is_file($url)) {
                 $files[] = $filename;
             } else {
                 $directories[] = $filename;
